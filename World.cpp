@@ -1,6 +1,6 @@
 #include "World.h"
 
-std::vector<std::vector<char>> World::Space::Space::space() {
+std::vector<std::vector<char>> World::Space::space() {
     return mSpace;
 }
 

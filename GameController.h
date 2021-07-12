@@ -8,7 +8,7 @@
 
 class GameController {
 public:
-    GameController(World::Space mWorld) : mWorld(mWorld) {
+    GameController(World::Space world) : mWorld(world) {
         mOuterBoundsOfWorldSpace = mWorld.mBoundaries.mCol;
     }
 
@@ -16,7 +16,10 @@ public:
     void clear();
     void loop();
     void setBeginningCursorPosition();
-    void userInput();
+    void mainUserInput();
+    void handleLastEnteredWord();
+    void spaceUserInput();
+    void handleLastEnteredLetter();
 
 private:
     const char* mFORMAT     = "%c[%d;%df";
@@ -24,6 +27,8 @@ private:
     const int mHEX          = 0x1B;
 
     int mOuterBoundsOfWorldSpace;
+    std::string lastEnteredWord;
+    char lastEnteredLetter;
 
     World::Space mWorld;
 };
