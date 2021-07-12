@@ -17,6 +17,7 @@ void Engine::GameController::clear() {
 void Engine::GameController::loop() {
     while (true) {
         clear();
+        moveCursorToPosition(1, 1);
         mWorld.print();
         setBeginningCursorPosition();
         mainUserInput();
@@ -34,6 +35,7 @@ void Engine::GameController::setBeginningCursorPosition() {
 }
 
 void Engine::GameController::mainUserInput() {
+    system("stty echo");
     std::cin >> lastEnteredWord;
 }
 
@@ -46,21 +48,35 @@ void Engine::GameController::handleLastEnteredWord() {
 }
 
 void Engine::GameController::spaceUserInput() {
+    system("stty -echo");
     std::cin >> lastEnteredLetter;
 }
 
 void Engine::GameController::handleLastEnteredLetter() {
-    int x = 0;
-    int y = 0;
+    int x = mCurrentMousePosition.mX;
+    int y = mCurrentMousePosition.mY;
+
     switch(lastEnteredLetter) {
         case 'q': break;
-        case 'w': y = 1 + mCurrentMousePosition.mY; break;
-        case 's': y = -1 + mCurrentMousePosition.mY; break;
+        case 'w': y = -1 + mCurrentMousePosition.mY; break;
+        case 's': y = 1 + mCurrentMousePosition.mY; break;
         case 'a': x = -1 + mCurrentMousePosition.mX; break;
-        case 'd': y = 1 + mCurrentMousePosition.mX; break;
+        case 'd': x = 1 + mCurrentMousePosition.mX; break;
         default: break;
     }
 
-    moveCursorToPosition(y, x);
-    if (lastEnteredLetter != 'q') handleLastEnteredLetter();
+    // TODO: Do not update if position has not changed.
+    if (y < mOuterBoundsOfWorldSpace + 1 &&
+        x < mOuterBoundsOfWorldSpace + 1 &&
+        y > 0 &&
+        x > 0) {
+        moveCursorToPosition(y, x);
+    } else {
+        moveCursorToPosition(mCurrentMousePosition.mY, mCurrentMousePosition.mX);
+    }
+
+    if (lastEnteredLetter != 'q') {
+        spaceUserInput();
+        handleLastEnteredLetter();
+    }
 }
