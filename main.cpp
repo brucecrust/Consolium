@@ -1,21 +1,22 @@
 #include "World.h"
-#include "GameController.h"
-
-// TODO: Create a GameController class to store goToXY and clear methods
-// TODO: Implement methods to move the cursor directly below the map when inputting commands
-// TODO: Implement methods to move the cursor to a location.
+#include "Engine.h"
 
 int main() {
     std::vector<std::vector<char>> space {
-            {'.', '.', '.', '.', '.'},
-            {'.', '.', '.', '.', '.'},
-            {'.', '.', '.', '.', '.'},
-            {'.', '.', '.', '.', '.'},
-            {'.', '.', '.', '.', '.'}
+            {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
+            {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
+            {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
+            {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
+            {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
+            {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
+            {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
+            {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
+            {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
+            {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.'}
     };
 
     auto world = World::Space(space);
-    auto game = GameController(world);
+    auto game = Engine::GameController(world);
     game.loop();
     return 0;
 }

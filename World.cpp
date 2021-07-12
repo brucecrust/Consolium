@@ -14,6 +14,7 @@ void World::Space::modify(char sprite, std::size_t col, std::size_t row) {
     mSpace[col][row] = sprite;
 }
 
+
 void World::Space::print() {
     for (std::size_t iCol = 0; iCol < mBoundaries.mCol; ++iCol) {
         for (std::size_t iRow = 0; iRow < mBoundaries.mRow; ++iRow) {
