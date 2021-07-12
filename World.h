@@ -14,8 +14,7 @@ namespace World {
             mRow = row;
         }
 
-        std::size_t mCol;
-        std::size_t mRow;
+        std::size_t mCol, mRow;
     };
 
     class Space {
